@@ -11,9 +11,10 @@
       border
       rounded
       p-5
+      bg-white
     "
   >
-    <h1 class="text-3xl text-center">Login</h1>
+    <h1 class="text-3xl mb-5">Login</h1>
     <input
       type="text"
       name="email"
@@ -30,7 +31,18 @@
       placeholder="Password"
       class="border rounded py-1 px-2"
     />
-    <button class="bg-sky-500 py-1 font-semibold rounded text-lg" type="submit">
+    <button
+      class="
+        bg-sky-500
+        py-1
+        font-semibold
+        rounded
+        text-lg
+        hover:bg-sky-400
+        duration-200
+      "
+      type="submit"
+    >
       Login
     </button>
     <span class="text-sm text-slate-400">

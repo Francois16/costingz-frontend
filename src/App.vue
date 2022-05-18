@@ -6,7 +6,7 @@ export default {
 </script>
 
 <template>
-  <main class="container">
+  <main class="bg-gray-50 min-h-screen min-w-full m-0 p-0">
     <Navbar />
     <RouterView />
   </main>
