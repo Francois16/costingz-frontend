@@ -21,7 +21,7 @@
         <RouterLink class="hover:text-emerald-600 duration-200 py-1 px-2 rounded" to="/accounts/login">
           Login
         </RouterLink>
-        <RouterLink class="hover:text-emerald-600 duration-200 py-1 px-2 rounded" to="/accounts/signup">
+        <RouterLink class="hover:text-emerald-600 duration-200 py-1 px-2 rounded" to="/accounts/register">
           Signup
         </RouterLink>
       </div>
