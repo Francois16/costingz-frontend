@@ -15,6 +15,12 @@
           >
             Home
           </RouterLink>
+          <RouterLink
+            class="hover:text-emerald-600 duration-200 py-1 px-2 rounded"
+            to="/ingredients"
+          >
+            ingredients
+          </RouterLink>
         </div>
       </div>
       <div class="flex items-center justify-end gap-3 text-sm text-slate-600">

@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import LoginView from "../views/LoginView.vue";
 import RegisterView from "../views/RegisterView.vue";
+import IngredientListView from "../views/ingredients/IngredientListView.vue";
 
 // import { HomeView, LoginView, RegisterView } from "@/views";
 
@@ -23,6 +24,11 @@ const router = createRouter({
       name: "register",
       component: RegisterView,
     },
+    {
+      path: "/ingredients",
+      name: "ingredients",
+      component: IngredientListView,
+    },
   ],
 });
 
@@ -30,9 +36,6 @@ router.beforeEach((to, from, next) => {
   const publicPages = ["/login", "/register"];
   const authRequired = !publicPages.includes(to.path);
 
-  console.log(`Auth required for ${to.path}: ${authRequired}`);
-  console.log(`Changing route from ${from.path} to ${to.path}`);
-  console.log(publicPages.includes(to.path));
   return next();
 });
 export default router;
