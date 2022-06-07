@@ -1,18 +1,17 @@
-<script>
-import { mapStores } from "pinia";
-import { useAuthUserStore } from "../stores/authUserStore";
+<script setup>
+import { onBeforeMount } from "vue";
+import { useAuthStore } from "../stores/useAuth.js";
 
-export default {
-  computed: {
-    ...mapStores(useAuthUserStore)
-  }
-}
+const auth = useAuthStore();
 
+onBeforeMount(() => {
+  auth.checkAuthentication();
+});
 </script>
 
 <template>
   <div class="container">
     <h1>Home</h1>
-    <p>user is authenticated: {{ authStore.isAuthenticated }}</p>
+    <p>user is authenticated: {{ auth.isAuthenticated }}</p>
   </div>
 </template>
