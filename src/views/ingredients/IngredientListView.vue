@@ -1,8 +1,18 @@
 <template>
   <main class="container">
-    <h1 class="text-4xl text-underline">Ingredients list</h1>
+    <div class="flex flex-row my-5 justify-between items-center">
+      <h1 class="text-underline text-4xl">Ingredients list</h1>
+      <RouterLink
+        to="/ingredient/add"
+        class="rounded bg-green-400 shadow-sm py-2 px-5 duration-200 hover:(bg-green-300)"
+      >
+        New Ingredient
+      </RouterLink>
+    </div>
     <div v-for="ingredient in ingredients">
-      <h1>{{ ingredient }}</h1>
+      <RouterLink :to="`/ingredient/${ingredient.id}/detail`">
+        {{ ingredient }}
+      </RouterLink>
     </div>
   </main>
 </template>
