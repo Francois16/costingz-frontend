@@ -11,26 +11,30 @@
         type="text"
         placeholder="name"
         v-model="ingredientFormData.name"
+        required
       />
       <input
         class="border rounded py-0.5 px-2"
         type="text"
         placeholder="price"
         v-model="ingredientFormData.price"
+        required
       />
       <input
         class="border rounded py-0.5 px-2"
         type="text"
         placeholder="magnitude"
         v-model="ingredientFormData.magnitude"
+        required
       />
       <select
         class="border rounded py-1.5 px-2"
         name="unit"
         id="unit"
         v-model="ingredientFormData.unit"
+        required
       >
-        <option class="hidden" value="option 1">-- Select Unit --</option>
+        <option class="hidden" value="">-- Select Unit --</option>
         <optgroup v-for="(choices, group) in choices" :label="group">
           <option v-for="choice in choices" :value="choice">
             {{ choice }}
@@ -71,9 +75,7 @@ onBeforeMount(() => {
   axios
     .get("ingredient/create/")
     .then((res) => {
-      const data = JSON.parse(res.data);
-      choices.value = data;
-      console.log(res.data);
+      choices.value = JSON.parse(res.data);
     })
     .catch((err) => console.log(err));
 });
