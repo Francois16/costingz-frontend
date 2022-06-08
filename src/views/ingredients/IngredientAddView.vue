@@ -75,7 +75,7 @@ onBeforeMount(() => {
   axios
     .get("ingredient/create/")
     .then((res) => {
-      choices.value = JSON.parse(res.data);
+      choices.value = res.data;
     })
     .catch((err) => console.log(err));
 });
