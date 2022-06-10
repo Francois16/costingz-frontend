@@ -47,7 +47,6 @@
       >
         Submit
       </button>
-      <p>{{ ingredientFormData }}</p>
     </form>
   </main>
 </template>
@@ -73,7 +72,7 @@ function handleSubmit() {
 
 onBeforeMount(() => {
   axios
-    .get("ingredient/create/")
+    .get("ingredient/get-all-unit-choices/")
     .then((res) => {
       choices.value = res.data;
     })
