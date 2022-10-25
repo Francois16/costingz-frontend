@@ -1,36 +1,35 @@
-<template>
-  <main class="container">
-    <div class="flex flex-row my-5 justify-between items-center">
-      <h1 class="text-underline text-4xl">Ingredients list</h1>
-      <RouterLink
-        to="/ingredient/add"
-        class="rounded bg-green-400 shadow-sm py-2 px-5 duration-200 hover:(bg-green-300)"
-      >
-        New Ingredient
-      </RouterLink>
-    </div>
-    <div v-for="ingredient in ingredients">
-      <RouterLink :to="`/ingredient/${ingredient.id}/detail`">
-        {{ ingredient }}
-      </RouterLink>
-    </div>
-  </main>
-</template>
-
 <script setup>
 import { ref, onBeforeMount } from "vue";
-import axios from "axios";
+import Navbar from "@/components/ui/navbar.vue";
+import axios from "@/helpers/axios.js";
 
-const ingredients = ref({});
+const ingredients = ref();
+const loading = ref(true);
 
-function fetchIngredients() {
-  axios
-    .get("ingredient/list/")
-    .then((res) => (ingredients.value = res.data))
-    .catch((err) => console.log(err));
+async function getIngredients() {
+  try {
+    const resp = await axios.get("/ingredient/list/");
+    ingredients.value = resp.data;
+    loading.value = false;
+  } catch (error) {
+    console.log("IngredientListVue error");
+  }
 }
 
 onBeforeMount(() => {
-  fetchIngredients();
+  getIngredients();
 });
 </script>
+
+<template>
+  <Navbar />
+  <main class="container">
+    <ul v-if="!loading">
+      <li v-for="ingredient in ingredients">
+        {{ ingredient }}
+      </li>
+    </ul>
+
+    <p v-if="loading" class="text-3xl text-center">Loading...</p>
+  </main>
+</template>

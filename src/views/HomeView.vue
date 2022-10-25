@@ -1,17 +1,15 @@
 <script setup>
-import { onBeforeMount } from "vue";
-import { useAuthStore } from "../stores/useAuth.js";
+import Navbar from "../components/ui/navbar.vue";
+import { useAuthStore } from "../stores/useAuth";
 
 const auth = useAuthStore();
-
-onBeforeMount(() => {
-  auth.checkAuthentication();
-});
 </script>
 
 <template>
+  <Navbar />
   <div class="container">
     <h1>Home</h1>
-    <p>user is authenticated: {{ auth.isAuthenticated }}</p>
+    <p>{{ auth.user }}</p>
+    <p>{{ auth.isAuthenticated }}</p>
   </div>
 </template>

@@ -1,67 +1,40 @@
 import { defineStore } from "pinia";
-import { useRouter } from "vue-router";
-import axios from "axios";
+import axios from "../helpers/axios";
 
 export const useAuthStore = defineStore({
   id: "auth",
   state: () => ({
+    user: null,
     isAuthenticated: false,
-    refreshToken: "",
-    accessToken: "",
   }),
   getters: {},
   actions: {
-    login(data) {
-      this.setAccessToken(data.access);
-      this.setRefreshToken(data.refresh);
-      this.isAuthenticated = true;
-    },
+    // Logs the user in and sets access/refresh token to localStorage
+    async setUserAuthenticationStatus() {
+      const token = localStorage.getItem("token");
 
-    checkAuthentication() {
-      this.accessToken = this.getAccessToken();
-      this.refreshToken = this.getRefreshToken();
-
-      if (this.accessToken) {
-        this.isAuthenticated = true;
-      } else if (this.refreshToken) {
-        console.log("ran");
-        axios
-          .post("/auth/jwt/refresh/", { refresh: this.refreshToken })
-          .then((response) => {
-            console.log(response);
-            this.accessToken = response.access;
-            this.setAccessToken(response.access);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      } else {
-        useRouter().push("/accounts/login");
+      if (token) {
+        try {
+          this.setAxiosAuthorizationHeader(token);
+          const user = await axios.get("/auth/users/me");
+          this.user = user.data;
+          this.isAuthenticated = true;
+        } catch (error) {
+          this.logout();
+        }
       }
     },
 
-    setAccessToken(token) {
-      localStorage.setItem("accessToken", token);
-    },
-
-    setRefreshToken(token) {
-      localStorage.setItem("refreshToken", token);
-    },
-
-    getAccessToken() {
-      return localStorage.getItem("accessToken");
-    },
-
-    getRefreshToken() {
-      return localStorage.getItem("refreshToken");
-    },
-
+    // Logs the user out of the application
     logout() {
+      this.user = null;
       this.isAuthenticated = false;
-      this.accessToken = "";
-      this.refreshToken = "";
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
+      localStorage.removeItem("token");
+      axios.defaults.headers.common["Authorization"] = "";
+    },
+
+    setAxiosAuthorizationHeader(token) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     },
   },
 });

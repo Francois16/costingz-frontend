@@ -1,59 +1,49 @@
-<template>
-  <header class="w-full py-3 bg-white border-b">
-    <nav class="container flex items-center justify-between">
-      <div class="flex items-center justify-start gap-x-10">
-        <h1 class="text-3xl">
-          Costingz<span class="text-3xl text-emerald-500">.</span>
-        </h1>
+<script setup>
+import { useAuthStore } from "../../stores/useAuth";
+import { RouterLink, useRouter } from "vue-router";
 
-        <div
-          class="flex flex-row items-center justify-center text-slate-600 gap-3 text-sm"
-        >
-          <RouterLink
-            class="hover:text-emerald-600 duration-200 py-1 px-2 rounded"
-            to="/"
-          >
-            Home
-          </RouterLink>
-          <RouterLink
-            class="hover:text-emerald-600 duration-200 py-1 px-2 rounded"
-            to="/ingredients"
-          >
-            ingredients
-          </RouterLink>
-        </div>
-      </div>
-      <div class="flex items-center justify-end gap-3 text-sm text-slate-600">
-        <RouterLink
-          class="hover:text-emerald-600 duration-200 py-1 px-2 rounded"
+const router = useRouter();
+const auth = useAuthStore();
+
+function logout() {
+  auth.logout();
+  router.push("/login");
+}
+</script>
+
+<template>
+  <header class="min-h-16 flex">
+    <nav class="container flex items-center justify-between">
+      <RouterLink to="/" class="text-2xl font-semibold"
+        >Recipe Costing</RouterLink
+      >
+
+      <div v-if="!auth.isAuthenticated" class="hidden sm:(flex)">
+        <router-link
           to="/login"
+          class="bg-sky-800 p-3 rounded-md font-bold text-white"
         >
           Login
-        </RouterLink>
-        <RouterLink
-          class="hover:text-emerald-600 duration-200 py-1 px-2 rounded"
-          to="/register"
+        </router-link>
+      </div>
+      <div v-else class="flex items-center justify-center gap-3">
+        <RouterLink class="nav-link" to="/recipes/list">Recipes</RouterLink>
+        <RouterLink class="nav-link" to="/ingredients/list"
+          >Ingredients</RouterLink
         >
-          Signup
-        </RouterLink>
+        <button
+          class="bg-red-400 p-3 text-white font-bold rounded-md"
+          @click="logout"
+        >
+          Logout
+        </button>
       </div>
     </nav>
   </header>
 </template>
 
-<script setup>
-import { ref } from "vue";
-
-let isOpen = ref(false);
-</script>
-
-<style scoped>
-.router-link-active {
-  background-color: pink;
-}
-
-.router-link-active:hover {
-  color: inherit;
-  cursor: default;
+<style>
+.nav-link {
+  @apply bg-sky-400 p-3 text-white font-bold rounded-md;
 }
 </style>

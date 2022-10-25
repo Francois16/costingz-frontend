@@ -1,13 +1,16 @@
-<script>
-import Navbar from "./components/ui/navbar.vue";
-export default {
-  components: { Navbar },
-};
+<script setup>
+import { RouterView } from "vue-router";
+import { onBeforeMount } from "vue";
+import { useAuthStore } from "@/stores/useAuth.js";
+
+onBeforeMount(() => {
+  const auth = useAuthStore();
+  auth.setUserAuthenticationStatus();
+});
 </script>
 
 <template>
-  <main class="bg-gray-50 min-h-screen min-w-full m-0 p-0">
-    <Navbar />
+  <main>
     <RouterView />
   </main>
 </template>
