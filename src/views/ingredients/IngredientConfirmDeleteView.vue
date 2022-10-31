@@ -2,6 +2,7 @@
 import { Icon } from "@iconify/vue";
 import { onBeforeMount, ref } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
+import { useToast } from "vue-toast-notification";
 import axios from "@/helpers/axios.js";
 
 import DashboardLayout from "@/components/layouts/DashboardLayout.vue";
@@ -9,6 +10,7 @@ import DashboardHeading from "@/components/ui/text/DashboardHeading.vue";
 
 const route = useRoute();
 const router = useRouter();
+const toast = useToast();
 
 const recipes = ref({});
 const ingredient = ref({});
@@ -38,6 +40,7 @@ async function deleteIngredient() {
 
   try {
     const resp = await axios.delete(`ingredient/${id}/delete/`, { id });
+    toast.success(`Successfully deleted ${ingredient.value.name} ingredient`);
     router.go(-1);
   } catch (error) {
     console.log("deleteIngredient Error");
