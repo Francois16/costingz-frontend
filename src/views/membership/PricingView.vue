@@ -12,7 +12,7 @@ import Navbar from "../../components/ui/navbar.vue";
         <p class="text-5xl font-bold">Personal</p>
         <p class="text-2xl">$15/pm</p>
         <RouterLink
-          to="/subscribe"
+          to="/checkout"
           class="bg-slate-800 text-white font-semibold rounded-full py-4 text-xl items-center justify-center"
         >
           Start Free Trial
@@ -22,7 +22,7 @@ import Navbar from "../../components/ui/navbar.vue";
         <p class="text-5xl font-bold">Business</p>
         <p class="text-2xl">$25/pm</p>
         <RouterLink
-          to="/subscribe"
+          to="/checkout"
           class="bg-slate-800 text-white font-semibold rounded-full py-4 text-xl items-center justify-center"
         >
           Start Free Trial
@@ -32,7 +32,7 @@ import Navbar from "../../components/ui/navbar.vue";
         <p class="text-5xl font-bold">Enterprise</p>
         <p class="text-2xl">$75/pm</p>
         <RouterLink
-          to="/subscribe"
+          to="/checkout"
           class="bg-slate-800 text-white font-semibold rounded-full py-4 text-xl items-center justify-center"
         >
           Start Free Trial

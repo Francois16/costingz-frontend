@@ -1,18 +1,13 @@
 <script setup>
 import { RouterView } from "vue-router";
-import { onBeforeMount } from "vue";
 import { useAuthStore } from "@/stores/useAuth.js";
 
-onBeforeMount(() => {
-  const auth = useAuthStore();
-  auth.setUserAuthenticationStatus();
-});
+const auth = useAuthStore();
+auth.setUserAuthenticationStatus();
 </script>
 
 <template>
-  <main>
-    <RouterView />
-  </main>
+  <RouterView />
 </template>
 
 <style></style>

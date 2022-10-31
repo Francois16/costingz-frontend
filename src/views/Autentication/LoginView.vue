@@ -27,7 +27,7 @@ async function login() {
     auth.setUserAuthenticationStatus();
 
     // Redirect to homepage
-    router.push("/");
+    router.push("/dashboard");
   } catch (error) {
     auth.logout();
   }
@@ -43,7 +43,6 @@ async function login() {
         >&#8592; Home</router-link
       >
     </div>
-
     <div class="min-w-xs center sm:(min-w-sm) md:(min-w-lg)">
       <form @submit.prevent="login">
         <h1 class="font-bold text-center text-3xl capitalize">Welcome Back!</h1>

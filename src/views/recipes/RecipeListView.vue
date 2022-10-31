@@ -1,16 +1,17 @@
 <script setup>
+import DashboardLayoutVue from "@/components/layouts/DashboardLayout.vue";
+import DashboardHeadingVue from "@/components/ui/text/DashboardHeading.vue";
+import { Icon } from "@iconify/vue";
+
 import { ref, onBeforeMount } from "vue";
-import Navbar from "@/components/ui/Navbar.vue";
 import axios from "@/helpers/axios.js";
 
-const loading = ref(true);
 const recipes = ref();
 
 async function getRecipes() {
   try {
     const resp = await axios.get("/recipe/list/");
     recipes.value = resp.data;
-    loading.value = false;
   } catch (error) {
     console.log("recipe error", error);
   }
@@ -22,12 +23,17 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <Navbar />
-  <main class="container">
-    <p v-if="loading" class="text-3xl text-center mt-5">Loading...</p>
-
-    <ul v-if="!loading">
-      <li v-for="recipe in recipes">{{ recipe }}</li>
-    </ul>
-  </main>
+  <DashboardLayoutVue>
+    <template v-slot:content>
+      <DashboardHeadingVue>
+        <template v-slot:icon>
+          <Icon icon="tabler:clipboard-list" />
+        </template>
+        <template v-slot:heading>Recipes</template>
+      </DashboardHeadingVue>
+      <ul>
+        <li v-for="recipe in recipes">{{ recipe }}</li>
+      </ul>
+    </template>
+  </DashboardLayoutVue>
 </template>

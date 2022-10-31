@@ -14,8 +14,8 @@ function logout() {
 <template>
   <header class="min-h-16 flex">
     <nav class="container flex items-center justify-between">
-      <RouterLink to="/" class="text-2xl font-semibold">
-        Recipe Costing
+      <RouterLink to="/" class="text-2xl font-semibold font-display">
+        Costingz
       </RouterLink>
 
       <div v-if="!auth.isAuthenticated" class="hidden sm:(flex)">
@@ -27,11 +27,10 @@ function logout() {
         </router-link>
       </div>
       <div v-else class="flex items-center justify-center gap-3">
+        <RouterLink to="/recipes/list">recipes</RouterLink>
+        <RouterLink to="/ingredients/list">ingredients</RouterLink>
         <RouterLink to="/pricing">Pricing</RouterLink>
-        <button
-          class="bg-red-400 p-3 text-white font-bold rounded-md"
-          @click="logout"
-        >
+        <button class="text-red-700 p-3 font-bold rounded-md" @click="logout">
           Logout
         </button>
       </div>

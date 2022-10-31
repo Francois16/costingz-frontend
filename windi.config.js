@@ -4,7 +4,13 @@ export default defineConfig({
   theme: {
     extend: {
       colors: {
-        paper: "#eeeedd",
+        grey: "#f9fafb",
+        body: "#354a54",
+        primary: "#89cff0",
+      },
+      fontFamily: {
+        display: "Roboto, sans-serif",
+        body: "Lato, sans-serif",
       },
     },
     container: {
@@ -14,4 +20,5 @@ export default defineConfig({
       },
     },
   },
+  plugins: [require("windicss/plugin/forms")],
 });
