@@ -1,12 +1,15 @@
 <script setup>
 import { useAuthStore } from "../../stores/useAuth";
 import { RouterLink, useRouter } from "vue-router";
+import { useToast } from "vue-toastification";
 
 const router = useRouter();
 const auth = useAuthStore();
+const toast = useToast();
 
 function logout() {
   auth.logout();
+  toast.info("Successfully logged out!");
   router.push("/login");
 }
 </script>

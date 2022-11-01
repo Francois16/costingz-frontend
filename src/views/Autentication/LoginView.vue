@@ -3,9 +3,11 @@ import { useAuthStore } from "../../stores/useAuth";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import axios from "axios";
+import { useToast } from "vue-toastification";
 
 const auth = useAuthStore();
 const router = useRouter();
+const toast = useToast();
 
 const email = ref("");
 const password = ref("");
@@ -24,11 +26,13 @@ async function login() {
     localStorage.setItem("token", token);
 
     // Authenticated user on frontend
-    auth.setUserAuthenticationStatus();
+    await auth.setUserAuthenticationStatus();
 
+    toast.success("Successfully logged in!");
     // Redirect to homepage
     router.push("/dashboard");
   } catch (error) {
+    toast.error("Oops! Something went wrong, try again.");
     auth.logout();
   }
 }

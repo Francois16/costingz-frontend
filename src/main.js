@@ -1,11 +1,11 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import { autoAnimatePlugin } from "@formkit/auto-animate/vue";
-import ToastPlugin from "vue-toast-notification";
+import Toast, { POSITION } from "vue-toastification";
 
 // WindiCSS
 import "virtual:windi.css";
-import "vue-toast-notification/dist/theme-sugar.css";
+import "vue-toastification/dist/index.css";
 
 import App from "./App.vue";
 import router from "./router";
@@ -13,7 +13,9 @@ import router from "./router";
 const app = createApp(App);
 
 app.use(autoAnimatePlugin);
-app.use(ToastPlugin);
+app.use(Toast, {
+  position: POSITION.BOTTOM_RIGHT,
+});
 app.use(createPinia());
 app.use(router);
 

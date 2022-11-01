@@ -2,7 +2,7 @@
 import { Icon } from "@iconify/vue";
 import { onBeforeMount, ref } from "vue";
 import { RouterLink, useRoute, useRouter } from "vue-router";
-import { useToast } from "vue-toast-notification";
+import { useToast } from "vue-toastification";
 import axios from "@/helpers/axios.js";
 
 import DashboardLayout from "@/components/layouts/DashboardLayout.vue";
@@ -40,9 +40,12 @@ async function deleteIngredient() {
 
   try {
     const resp = await axios.delete(`ingredient/${id}/delete/`, { id });
-    toast.success(`Successfully deleted ${ingredient.value.name} ingredient`);
+    toast.success(`Successfully deleted ${ingredient.value.name}`);
     router.go(-1);
   } catch (error) {
+    toast.error(
+      "Oops something went wrong when trying to delete your ingredient."
+    );
     console.log("deleteIngredient Error");
   }
 }
