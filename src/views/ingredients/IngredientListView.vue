@@ -1,13 +1,11 @@
 <script setup>
+  import { ref, onBeforeMount } from "vue";
+  import { RouterLink } from "vue-router";
   import { Icon } from "@iconify/vue";
+  import axios from "@/helpers/axios.js";
 
   import DashboardLayout from "@/components/layouts/DashboardLayout.vue";
   import DashboardHeading from "@/components/ui/text/DashboardHeading.vue";
-
-  import { ref, onBeforeMount } from "vue";
-
-  import axios from "@/helpers/axios.js";
-  import { RouterLink } from "vue-router";
 
   const ingredients = ref({});
 
@@ -18,10 +16,6 @@
     } catch (error) {
       console.log("IngredientListVue error");
     }
-  }
-
-  function addIngredient() {
-    isOpen = true;
   }
 
   function updateIngredient(id) {
@@ -43,12 +37,14 @@
         </template>
         <template v-slot:heading>Ingredients</template>
         <template v-slot:button>
-          <RouterLink
-            to="/dashboard/ingredient/add"
-            class="bg-primary flex p-2 rounded-full cursor-pointer"
-          >
-            <Icon icon="tabler:plus" />
-          </RouterLink>
+          <tippy content="Create new ingredient">
+            <RouterLink
+              to="/dashboard/ingredient/add"
+              class="bg-primary flex p-2 rounded-full cursor-pointer"
+            >
+              <Icon icon="tabler:plus" />
+            </RouterLink>
+          </tippy>
         </template>
       </DashboardHeading>
 
@@ -63,10 +59,7 @@
           </tr>
         </thead>
         <tbody class="">
-          <tr
-            class="odd:(bg-light-600)"
-            v-for="ingredient in ingredients"
-          >
+          <tr class="odd:(bg-light-600)" v-for="ingredient in ingredients">
             <td class="px-3 py-2 capitalize">
               {{ ingredient.name }}
             </td>
@@ -80,24 +73,22 @@
               }}
             </td>
             <td class="px-3 py-2 flex gap-1 items-center">
-              <RouterLink
-                :to="`/dashboard/ingredient/${ingredient.id}/confirm-delete`"
-                class="text-xl flex items-center p-2"
-              >
-                <Icon
-                  icon="tabler:trash"
-                  class="text-red-500"
-                />
-              </RouterLink>
-              <button
-                class="text-xl flex items-center p-2"
-                @click.prevent="updateIngredient(ingredient.id)"
-              >
-                <Icon
-                  icon="tabler:edit"
-                  class="text-primary"
-                />
-              </button>
+              <tippy content="Delete Ingredient">
+                <RouterLink
+                  :to="`/dashboard/ingredient/${ingredient.id}/confirm-delete`"
+                  class="text-xl flex items-center p-2"
+                >
+                  <Icon icon="tabler:trash" class="text-red-500" />
+                </RouterLink>
+              </tippy>
+              <tippy content="Update Ingredient">
+                <button
+                  class="text-xl flex items-center p-2"
+                  @click.prevent="updateIngredient(ingredient.id)"
+                >
+                  <Icon icon="tabler:edit" class="text-primary" />
+                </button>
+              </tippy>
             </td>
           </tr>
         </tbody>
