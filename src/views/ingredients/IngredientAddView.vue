@@ -63,10 +63,7 @@
         @submit.prevent="createIngredient"
         class="max-w-xl flex flex-col gap-6"
       >
-        <div
-          class="flex flex-col gap-2"
-          v-if="errors"
-        >
+        <div class="flex flex-col gap-2" v-if="errors">
           <div
             class="bg-red-200 text-red-600 py-1 px-3 rounded"
             v-for="(errorMessages, key) in errors"
@@ -79,27 +76,14 @@
         </div>
 
         <div class="flex flex-col gap-1">
-          <label
-            class="text-sm"
-            for="name"
-            >Name</label
-          >
-          <input
-            type="text"
-            v-model="name"
-            placeholder="eg. Apples"
-            required
-          />
+          <label class="text-sm" for="name">Name</label>
+          <input type="text" v-model="name" placeholder="eg. Apples" required />
           <span class="text-sm text-slate-400 ml-1"
             >The name of your ingredient</span
           >
         </div>
         <div class="flex flex-col gap-1">
-          <label
-            class="text-sm"
-            for="price"
-            >Price</label
-          >
+          <label class="text-sm" for="price">Price</label>
           <div
             class="flex items-center bg-white w-full border focus-within:(border-primary)"
           >
@@ -115,11 +99,7 @@
           <span class="text-sm text-slate-400 ml-1">The price you paid</span>
         </div>
         <div class="flex flex-col gap-1">
-          <label
-            class="text-sm"
-            for="magnitude"
-            >Magnitude</label
-          >
+          <label class="text-sm" for="magnitude">Magnitude</label>
           <input
             type="text"
             v-model="magnitude"
@@ -131,31 +111,13 @@
           >
         </div>
         <div class="flex flex-col gap-1">
-          <label
-            class="text-sm"
-            for="unit"
-            >Unit</label
-          >
-          <select
-            v-model="unit"
-            name="unit"
-            required
-          >
-            <option
-              value=""
-              selected
-              hidden
-            >
+          <label class="text-sm" for="unit">Unit</label>
+          <select v-model="unit" name="unit" required>
+            <option value="" selected hidden>
               --- Please select an option ---
             </option>
-            <optgroup
-              v-for="(units, key) in units"
-              :label="key"
-            >
-              <option
-                :value="unit[0]"
-                v-for="unit in units"
-              >
+            <optgroup v-for="(units, key) in units" :label="key">
+              <option :value="unit[0]" v-for="unit in units">
                 {{ unit[1] }}
               </option>
             </optgroup>

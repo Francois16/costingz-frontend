@@ -12,8 +12,9 @@ import RegisterView from "../views/Autentication/RegisterView.vue";
 
 // Ingredient Routes
 import IngredientListView from "@/views/ingredients/IngredientListView.vue";
-import IngredientConfirmDeleteView from "@/views/ingredients/IngredientConfirmDeleteView.vue"
-import IngredientAddView from "@/views/ingredients/IngredientAddView.vue"
+import IngredientConfirmDeleteView from "@/views/ingredients/IngredientConfirmDeleteView.vue";
+import IngredientAddView from "@/views/ingredients/IngredientAddView.vue";
+import IngredientUpdateView from "@/views/ingredients/IngredientUpdateView.vue";
 
 // Recipe Routes
 import RecipeListView from "@/views/recipes/RecipeListView.vue";
@@ -80,6 +81,11 @@ const router = createRouter({
       path: "/dashboard/ingredient/:id/confirm-delete",
       name: "confirm-ingredient-delete",
       component: IngredientConfirmDeleteView,
+    },
+    {
+      path: "/dashboard/ingredient/:id/update",
+      name: "ingredient-update",
+      component: IngredientUpdateView,
     },
 
     // Recipe Routes

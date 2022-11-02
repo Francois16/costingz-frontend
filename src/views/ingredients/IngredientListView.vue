@@ -82,12 +82,15 @@
                 </RouterLink>
               </tippy>
               <tippy content="Update Ingredient">
-                <button
+                <RouterLink
+                  :to="{
+                    name: 'ingredient-update',
+                    params: { id: ingredient.id },
+                  }"
                   class="text-xl flex items-center p-2"
-                  @click.prevent="updateIngredient(ingredient.id)"
                 >
                   <Icon icon="tabler:edit" class="text-primary" />
-                </button>
+                </RouterLink>
               </tippy>
             </td>
           </tr>
