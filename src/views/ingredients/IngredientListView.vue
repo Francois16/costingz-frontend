@@ -1,38 +1,40 @@
 <script setup>
-import { Icon } from "@iconify/vue";
+  import { Icon } from "@iconify/vue";
 
-import DashboardLayout from "@/components/layouts/DashboardLayout.vue";
-import DashboardHeading from "@/components/ui/text/DashboardHeading.vue";
+  import DashboardLayout from "@/components/layouts/DashboardLayout.vue";
+  import DashboardHeading from "@/components/ui/text/DashboardHeading.vue";
 
-import { ref, onBeforeMount } from "vue";
+  import { ref, onBeforeMount } from "vue";
 
-import axios from "@/helpers/axios.js";
+  import axios from "@/helpers/axios.js";
+  import { RouterLink } from "vue-router";
 
-const ingredients = ref({});
+  const ingredients = ref({});
 
-async function getIngredients() {
-  try {
-    const resp = await axios.get("/ingredient/list/");
-    ingredients.value = resp.data;
-  } catch (error) {
-    console.log("IngredientListVue error");
+  async function getIngredients() {
+    try {
+      const resp = await axios.get("/ingredient/list/");
+      ingredients.value = resp.data;
+    } catch (error) {
+      console.log("IngredientListVue error");
+    }
   }
-}
 
-function addIngredient() {
-  alert("add ingredient not implemented yet");
-}
+  function addIngredient() {
+    isOpen = true;
+  }
 
-function updateIngredient(id) {
-  alert(`Updating ingredient with id: ${id}`);
-}
+  function updateIngredient(id) {
+    alert(`Updating ingredient with id: ${id}`);
+  }
 
-onBeforeMount(() => {
-  getIngredients();
-});
+  onBeforeMount(() => {
+    getIngredients();
+  });
 </script>
 
 <template>
+  <!-- Main -->
   <DashboardLayout>
     <template v-slot:content>
       <DashboardHeading>
@@ -41,27 +43,33 @@ onBeforeMount(() => {
         </template>
         <template v-slot:heading>Ingredients</template>
         <template v-slot:button>
-          <div
-            @click="addIngredient"
+          <RouterLink
+            to="/dashboard/ingredient/add"
             class="bg-primary flex p-2 rounded-full cursor-pointer"
           >
             <Icon icon="tabler:plus" />
-          </div>
+          </RouterLink>
         </template>
       </DashboardHeading>
+
       <table class="w-full bg-white shadow-lg rounded overflow-hidden">
-        <thead class="border-b bg-primary">
+        <thead class="bg-body text-white">
           <tr>
             <th class="text-left p-3">Name ({{ ingredients.length }} items)</th>
             <th class="text-left p-3">Purchase Amount</th>
             <th class="text-left p-3">Purchase Price</th>
             <th class="text-left p-3">Price/Unit</th>
-            <th class="text-left p-3">Action</th>
+            <th class="text-left p-3">Actions</th>
           </tr>
         </thead>
-        <tbody>
-          <tr v-for="ingredient in ingredients">
-            <td class="px-3 py-2 capitalize">{{ ingredient.name }}</td>
+        <tbody class="">
+          <tr
+            class="odd:(bg-light-600)"
+            v-for="ingredient in ingredients"
+          >
+            <td class="px-3 py-2 capitalize">
+              {{ ingredient.name }}
+            </td>
             <td class="px-3 py-2">
               {{ ingredient.magnitude }} {{ ingredient.short_unit }}
             </td>
@@ -76,13 +84,19 @@ onBeforeMount(() => {
                 :to="`/dashboard/ingredient/${ingredient.id}/confirm-delete`"
                 class="text-xl flex items-center p-2"
               >
-                <Icon icon="typcn:times" class="text-red-500" />
+                <Icon
+                  icon="tabler:trash"
+                  class="text-red-500"
+                />
               </RouterLink>
               <button
                 class="text-xl flex items-center p-2"
                 @click.prevent="updateIngredient(ingredient.id)"
               >
-                <Icon icon="tabler:edit" class="" />
+                <Icon
+                  icon="tabler:edit"
+                  class="text-primary"
+                />
               </button>
             </td>
           </tr>
