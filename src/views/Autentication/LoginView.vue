@@ -1,41 +1,41 @@
 <script setup>
-import { useAuthStore } from "../../stores/useAuth";
-import { ref } from "vue";
-import { useRouter } from "vue-router";
-import axios from "axios";
-import { useToast } from "vue-toastification";
+  import { useAuthStore } from "../../stores/useAuth";
+  import { ref } from "vue";
+  import { useRouter } from "vue-router";
+  import axios from "axios";
+  import { useToast } from "vue-toastification";
 
-const auth = useAuthStore();
-const router = useRouter();
-const toast = useToast();
+  const auth = useAuthStore();
+  const router = useRouter();
+  const toast = useToast();
 
-const email = ref("");
-const password = ref("");
+  const email = ref("");
+  const password = ref("");
 
-async function login() {
-  try {
-    const resp = await axios.post("/auth/jwt/create/", {
-      email: email.value,
-      password: password.value,
-    });
+  async function login() {
+    try {
+      const resp = await axios.post("/auth/jwt/create/", {
+        email: email.value,
+        password: password.value,
+      });
 
-    // Extract access token from response
-    const token = resp.data.access;
+      // Extract access token from response
+      const token = resp.data.access;
 
-    // Set access token in localstorage
-    localStorage.setItem("token", token);
+      // Set access token in localstorage
+      localStorage.setItem("token", token);
 
-    // Authenticated user on frontend
-    await auth.setUserAuthenticationStatus();
+      // Authenticated user on frontend
+      await auth.setUserAuthenticationStatus();
 
-    toast.success("Successfully logged in!");
-    // Redirect to homepage
-    router.push("/dashboard");
-  } catch (error) {
-    toast.error("Oops! Something went wrong, try again.");
-    auth.logout();
+      toast.success("Successfully logged in!");
+      // Redirect to homepage
+      router.push("/dashboard");
+    } catch (error) {
+      toast.error("Oops! Something went wrong, try again.");
+      auth.logout();
+    }
   }
-}
 </script>
 
 <template>
@@ -102,19 +102,19 @@ async function login() {
 </template>
 
 <style scoped>
-.center {
-  @apply transform top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute;
-}
+  .center {
+    @apply transform top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 absolute;
+  }
 
-form {
-  @apply bg-white rounded-lg flex flex-col px-8 pt-16 pb-8 shadow-2xl gap-3;
-}
+  form {
+    @apply bg-white rounded-lg flex flex-col px-8 pt-16 pb-8 shadow-2xl gap-3;
+  }
 
-input {
-  @apply border rounded-md py-3 px-4;
-}
+  input {
+    @apply border rounded-md py-3 px-4;
+  }
 
-.decoration {
-  @apply duration-200 underline underline-slate-400 underline-offset-4 hover:(underline-blue-500 text-blue-500);
-}
+  .decoration {
+    @apply duration-200 underline underline-slate-400 underline-offset-4 hover:(underline-blue-500 text-blue-500);
+  }
 </style>
