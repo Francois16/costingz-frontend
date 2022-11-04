@@ -2,6 +2,7 @@
   import { ref, onBeforeMount } from "vue";
   import { RouterLink } from "vue-router";
   import { Icon } from "@iconify/vue";
+  import { useToast } from "vue-toastification";
   import axios from "@/helpers/axios.js";
 
   import DashboardLayout from "@/components/layouts/DashboardLayout.vue";
@@ -9,17 +10,15 @@
 
   const ingredients = ref({});
 
+  const toast = useToast();
+
   async function getIngredients() {
     try {
       const resp = await axios.get("/ingredient/list/");
       ingredients.value = resp.data;
     } catch (error) {
-      console.log("IngredientListVue error");
+      toast.error("Something went wrong while fetching your ingredients");
     }
-  }
-
-  function updateIngredient(id) {
-    alert(`Updating ingredient with id: ${id}`);
   }
 
   onBeforeMount(() => {
