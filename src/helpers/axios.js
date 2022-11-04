@@ -13,8 +13,8 @@ axios.interceptors.response.use(
   function (error) {
     // Redirect to login page if token has expired
     const auth = useAuthStore();
-    console.log("check for 401");
     if (error.response.status == 401) {
+      console.log("401 reached");
       auth.logout();
       router.push("/login");
     }
