@@ -57,7 +57,7 @@
           <tr class="odd:(bg-light-600)" v-for="recipe in recipes">
             <td class="px-3 py-2 capitalize">
               <RouterLink
-                :to="'/dashboard'"
+                :to="{ name: 'recipe-detail', params: { id: recipe.id } }"
                 class="text-blue-600 underline-offset-4 duration-200 hover:(underline)"
               >
                 {{ recipe.name }}
