@@ -1,17 +1,17 @@
 <script setup>
-import { useAuthStore } from "../../stores/useAuth";
-import { RouterLink, useRouter } from "vue-router";
-import { useToast } from "vue-toastification";
+  import { useAuthStore } from "../../stores/useAuth";
+  import { RouterLink, useRouter } from "vue-router";
+  import { useToast } from "vue-toastification";
 
-const router = useRouter();
-const auth = useAuthStore();
-const toast = useToast();
+  const router = useRouter();
+  const auth = useAuthStore();
+  const toast = useToast();
 
-function logout() {
-  auth.logout();
-  toast.info("Successfully logged out!");
-  router.push("/login");
-}
+  function logout() {
+    auth.logout();
+    toast.info("Successfully logged out!");
+    router.push("/login");
+  }
 </script>
 
 <template>
@@ -30,8 +30,6 @@ function logout() {
         </router-link>
       </div>
       <div v-else class="flex items-center justify-center gap-3">
-        <RouterLink to="/recipes/list">recipes</RouterLink>
-        <RouterLink to="/ingredients/list">ingredients</RouterLink>
         <RouterLink to="/pricing">Pricing</RouterLink>
         <button class="text-red-700 p-3 font-bold rounded-md" @click="logout">
           Logout
@@ -42,7 +40,7 @@ function logout() {
 </template>
 
 <style>
-.nav-link {
-  @apply bg-sky-400 p-3 text-white font-bold rounded-md;
-}
+  .nav-link {
+    @apply bg-sky-400 p-3 text-white font-bold rounded-md;
+  }
 </style>
