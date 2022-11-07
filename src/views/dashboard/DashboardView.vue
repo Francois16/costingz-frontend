@@ -1,11 +1,7 @@
 <script setup>
-import DashboardLayout from "@/components/layouts/DashboardLayout.vue";
+  import DashboardLayout from "@/components/layouts/DashboardLayout.vue";
 </script>
 
 <template>
-  <DashboardLayout>
-    <template v-slot:content>
-      <div class="">Dashboard</div>
-    </template>
-  </DashboardLayout>
+  <div class="">Dashboard</div>
 </template>

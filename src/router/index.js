@@ -34,6 +34,7 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
+      meta: { layout: "base" },
       component: HomeView,
     },
 
@@ -48,11 +49,13 @@ const router = createRouter({
     {
       path: "/login",
       name: "login",
+      meta: { layout: "base" },
       component: LoginView,
     },
     {
       path: "/register",
       name: "register",
+      meta: { layout: "base" },
       component: RegisterView,
     },
 
@@ -60,23 +63,25 @@ const router = createRouter({
     {
       path: "/pricing",
       name: "pricing",
+      meta: { layout: "base" },
       component: PricingView,
     },
     {
       path: "/checkout",
       name: "checkout",
+      meta: { layout: "base" },
       component: CheckoutView,
     },
 
     // Ingredient Routes
     {
       path: "/dashboard/ingredients/list",
-      name: "ingredientList",
+      name: "ingredient-list",
       component: IngredientListView,
     },
     {
       path: "/dashboard/ingredient/add",
-      name: "ingredientAdd",
+      name: "ingredient-add",
       component: IngredientAddView,
     },
     {
@@ -93,7 +98,7 @@ const router = createRouter({
     // Recipe Routes
     {
       path: "/dashboard/recipes/list",
-      name: "recipeList",
+      name: "recipe-list",
       component: RecipeListView,
     },
     {
