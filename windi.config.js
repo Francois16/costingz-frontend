@@ -5,6 +5,7 @@ export default defineConfig({
     extend: {
       colors: {
         grey: "#f9fafb",
+        muted: "#9ca3af",
         body: "#354a54",
         primary: "#89cff0",
       },
