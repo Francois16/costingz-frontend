@@ -2,8 +2,13 @@
   import { ref } from "vue";
   import { RouterLink } from "vue-router";
   import { Icon } from "@iconify/vue";
+  import { vOnClickOutside } from "@vueuse/components";
 
   const navOpen = ref(false);
+
+  const closeNav = () => {
+    navOpen.value = false;
+  };
 </script>
 
 <template>
@@ -11,6 +16,7 @@
   <div
     class="bg-white flex flex-col rounded-2xl shadow inset-y-5 left-5 gap-1 duration-200 fixed"
     :class="navOpen ? 'w-64 p-6' : 'w-14 px-2 py-4'"
+    v-on-click-outside="closeNav"
   >
     <div
       class="flex delay-200 items-center justify-between"
