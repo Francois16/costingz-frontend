@@ -3,7 +3,7 @@
   import { RouterLink } from "vue-router";
   import { Icon } from "@iconify/vue";
 
-  const navOpen = ref(true);
+  const navOpen = ref(false);
 </script>
 
 <template>

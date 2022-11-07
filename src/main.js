@@ -14,6 +14,10 @@ import App from "./App.vue";
 import router from "./router";
 
 const app = createApp(App);
+const pinia = createPinia();
+
+// Add router to all pinia stores.
+pinia.use(() => ({ router: router }));
 
 app.use(autoAnimatePlugin);
 app.use(Toast, {
@@ -22,7 +26,7 @@ app.use(Toast, {
 app.use(VueTippy, {
   defaultProps: { placement: "top", theme: "material" },
 });
-app.use(createPinia());
+app.use(pinia);
 app.use(router);
 
 app.mount("#app");

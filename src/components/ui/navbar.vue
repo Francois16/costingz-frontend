@@ -1,17 +1,7 @@
 <script setup>
   import { useAuthStore } from "../../stores/useAuth";
-  import { RouterLink, useRouter } from "vue-router";
-  import { useToast } from "vue-toastification";
 
-  const router = useRouter();
   const auth = useAuthStore();
-  const toast = useToast();
-
-  function logout() {
-    auth.logout();
-    toast.info("Successfully logged out!");
-    router.push("/login");
-  }
 </script>
 
 <template>
@@ -31,7 +21,10 @@
       </div>
       <div v-else class="flex items-center justify-center gap-3">
         <RouterLink to="/pricing">Pricing</RouterLink>
-        <button class="text-red-700 p-3 font-bold rounded-md" @click="logout">
+        <button
+          class="text-red-700 p-3 font-bold rounded-md"
+          @click="auth.logout"
+        >
           Logout
         </button>
       </div>

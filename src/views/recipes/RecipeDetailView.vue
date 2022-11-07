@@ -21,10 +21,6 @@
     }
   }
 
-  function formatNumber(x) {
-    return x.toFixed(2);
-  }
-
   onBeforeMount(() => {
     getRecipeDetails();
   });
@@ -44,8 +40,9 @@
       </tippy>
     </template>
   </DashboardHeading>
+
   <section class="grid md:(grid-cols-2) gap-6">
-    <div class="bg-white rounded shadow">
+    <div class="bg-white rounded-2xl shadow">
       <h6 class="text-2xl font-bold p-4 underline underline-offset-8">
         Yield & Cost
       </h6>
@@ -54,7 +51,7 @@
           class="flex flex-col sm:(flex-row) justify-between items-center p-3"
         >
           <span>Total Recipe Cost</span>
-          <span class="bg-primary rounded-full px-5 py-1 font-bold">
+          <span class="bg-primary rounded-full px-5 font-bold">
             R{{ recipe.total_cost }}
           </span>
         </li>

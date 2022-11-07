@@ -1,10 +1,13 @@
 import { defineStore } from "pinia";
+import { useToast } from "vue-toastification";
 import axios from "../helpers/axios";
+
+const toast = useToast();
 
 export const useAuthStore = defineStore({
   id: "auth",
   state: () => ({
-    user: localStorage.getItem("user") || null,
+    user: localStorage.getItem("user") || "",
     isAuthenticated: localStorage.getItem("token") ? true : false,
   }),
   getters: {},
@@ -30,11 +33,13 @@ export const useAuthStore = defineStore({
 
     // Logs the user out of the application
     logout() {
-      this.user = null;
+      this.user = "";
       this.isAuthenticated = false;
       localStorage.removeItem("token");
       localStorage.removeItem("user");
       axios.defaults.headers.common["Authorization"] = "";
+      toast.info("Successfully logged out! from store");
+      this.router.push({ name: "login" });
     },
 
     setAxiosAuthorizationHeader(token) {
