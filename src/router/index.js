@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
-
+import { useAuthStore } from "@/stores/useAuth";
 // Views
 import HomeView from "../views/HomeView.vue";
 
@@ -125,6 +125,22 @@ const router = createRouter({
       redirect: "/404",
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  const auth = useAuthStore();
+  const publicPages = ["home", "login", "register"];
+
+  if (publicPages.includes(to.name)) {
+    return next();
+  }
+
+  if (!auth.isAuthenticated) {
+    console.log("user not authenticated");
+    router.push({ name: "login" });
+  }
+
+  return next();
 });
 
 export default router;
