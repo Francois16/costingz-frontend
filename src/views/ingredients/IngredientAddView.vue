@@ -127,7 +127,7 @@
   input,
   select,
   option {
-    @apply py-3 px-2 border bg-white text-lg w-full focus: (outline-none border-primary);
+    @apply py-3 px-2 border bg-white text-lg w-full focus:(outline-none border-primary);
   }
 
   option {

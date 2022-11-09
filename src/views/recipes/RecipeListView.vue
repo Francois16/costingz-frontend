@@ -1,10 +1,9 @@
 <script setup>
-  import DashboardHeadingVue from "@/components/ui/text/DashboardHeading.vue";
-  import { Icon } from "@iconify/vue";
-
   import { ref, onBeforeMount } from "vue";
+  import { Icon } from "@iconify/vue";
   import axios from "@/helpers/axios.js";
-  import { RouterLink } from "vue-router";
+
+  import DashboardHeadingVue from "@/components/ui/text/DashboardHeading.vue";
 
   const recipes = ref();
 
@@ -31,7 +30,7 @@
     <template #button>
       <tippy content="Create New Recipe">
         <RouterLink
-          :to="'/dashboard'"
+          :to="{ name: 'recipe-create' }"
           class="bg-primary p-2 flex rounded-full cursor-pointer"
         >
           <Icon icon="tabler:plus" />
