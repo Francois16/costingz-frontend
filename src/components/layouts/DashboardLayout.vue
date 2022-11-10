@@ -1,6 +1,6 @@
 <script setup>
-import DashboardSideNav from "@/components/ui/DashboardSideNav.vue";
-import DashboardTopNav from "@/components/ui/DashboardTopNav.vue";
+  import DashboardSideNav from "@/components/ui/DashboardSideNav.vue";
+  import DashboardTopNav from "@/components/ui/DashboardTopNav.vue";
 </script>
 
 <template>
@@ -8,7 +8,7 @@ import DashboardTopNav from "@/components/ui/DashboardTopNav.vue";
     <aside>
       <DashboardSideNav />
     </aside>
-    <div class="container flex flex-col w-full max-w-6xl">
+    <div class="container flex flex-col w-full">
       <nav>
         <DashboardTopNav />
       </nav>
