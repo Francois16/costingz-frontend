@@ -4,17 +4,22 @@
   import { Icon } from "@iconify/vue";
   import { vOnClickOutside } from "@vueuse/components";
 
-  const navOpen = ref(false);
+  const navOpen = ref(window.innerWidth <= 1024 ? false : true);
 
   const closeNav = () => {
-    navOpen.value = false;
+    if (window.innerWidth <= 1024) {
+      navOpen.value = false;
+    }
   };
 </script>
 
 <template>
-  <div class="bg-transparent min-h-screen w-20 lg:(w-64)"></div>
   <div
-    class="bg-white flex flex-col rounded-2xl shadow inset-y-5 left-5 gap-1 duration-200 fixed"
+    class="bg-transparent min-h-screen duration-200"
+    :class="navOpen ? 'w-20 lg:(w-64)' : 'w-20'"
+  ></div>
+  <div
+    class="bg-white flex flex-col shadow inset-y-0 left-0 gap-1 duration-200 fixed"
     :class="navOpen ? 'w-64 p-6' : 'w-14 px-2 py-4'"
     v-on-click-outside="closeNav"
   >
@@ -24,7 +29,7 @@
     >
       <RouterLink
         to="/dashboard"
-        class="rounded flex font-display font-bold bg-blue-400 h-8 text-white text-center w-8 items-center justify-center"
+        class="rounded flex font-display font-bold bg-primary h-8 text-white text-center w-8 items-center justify-center"
       >
         C
       </RouterLink>

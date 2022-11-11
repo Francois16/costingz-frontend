@@ -21,6 +21,7 @@ import RecipeListView from "@/views/recipes/RecipeListView.vue";
 import RecipeConfirmDeleteView from "@/views/recipes/RecipeConfirmDeleteView.vue";
 import RecipeDetailView from "@/views/recipes/RecipeDetailView.vue";
 import RecipeCreateView from "@/views/recipes/RecipeCreateView.vue";
+import RecipeUpdateView from "@/views/recipes/RecipeUpdateView.vue";
 
 // Misc Routes
 import NotFoundView from "@/views/NotFoundView.vue";
@@ -111,6 +112,11 @@ const router = createRouter({
       path: "/dashboard/recipe/:id/delete",
       name: "recipe-delete",
       component: RecipeConfirmDeleteView,
+    },
+    {
+      path: "/dashboard/recipe/:id/update",
+      name: "recipe-update",
+      component: RecipeUpdateView,
     },
     {
       path: "/dashboard/recipe/:id/detail",

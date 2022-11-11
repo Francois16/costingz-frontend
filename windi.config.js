@@ -6,8 +6,11 @@ export default defineConfig({
       colors: {
         grey: "#f9fafb",
         muted: "#9ca3af",
-        body: "#354a54",
-        primary: "#89cff0",
+        body: "#495057",
+        primary: "#00c2ff",
+        accent: "#059669",
+        "accent-lighter": "#10b981",
+        error: "#f54643",
       },
       fontFamily: {
         display: "Roboto, sans-serif",

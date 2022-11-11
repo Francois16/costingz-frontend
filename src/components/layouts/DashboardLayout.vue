@@ -12,7 +12,7 @@
       <nav>
         <DashboardTopNav />
       </nav>
-      <main>
+      <main class="mb-10">
         <slot name="content"></slot>
       </main>
     </div>

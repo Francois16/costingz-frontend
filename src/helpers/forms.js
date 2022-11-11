@@ -4,3 +4,36 @@ export function resetErrors(formErrors) {
     formErrors.value[key] = [];
   }
 }
+
+export function buildVeeValidateErrorObjectFromResp() {
+  const resp = {
+    data: {
+      errors: [
+        {
+          attr: "email",
+          message: "Invalid email address",
+        },
+        {
+          attr: "email",
+          message: "Another email error",
+        },
+        {
+          attr: "password",
+          message: "incorrect password",
+        },
+      ],
+    },
+  };
+
+  let errors = {};
+
+  resp.data.errors.forEach((error) => {
+    if (errors[error.attr] === undefined) {
+      errors[error.attr] = [];
+    }
+
+    errors[error.attr].push(error.message);
+  });
+
+  console.log(errors);
+}

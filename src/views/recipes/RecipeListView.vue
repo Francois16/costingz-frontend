@@ -39,14 +39,16 @@
     </template>
   </DashboardHeadingVue>
 
-  <table class="w-full bg-white shadow-lg rounded overflow-hidden">
+  <table
+    class="w-full whitespace-nowrap bg-white shadow-lg rounded overflow-hidden"
+  >
     <thead class="bg-body text-white">
       <tr>
-        <th class="text-left p-3">Name</th>
-        <th class="text-left p-3">Yield</th>
-        <th class="text-left p-3">Cost</th>
-        <th class="text-left p-3">Cost/unit</th>
-        <th class="text-left p-3">Actions</th>
+        <th class="text-left p-3 tracking-wide w-auto">Name</th>
+        <th class="text-left p-3 tracking-wide w-auto">Yield</th>
+        <th class="text-left p-3 tracking-wide w-auto">Cost</th>
+        <th class="text-left p-3 tracking-wide w-auto">Cost/unit</th>
+        <th class="text-left p-3 tracking-wide w-25">Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -54,7 +56,7 @@
         <td class="px-3 py-2 capitalize">
           <RouterLink
             :to="{ name: 'recipe-detail', params: { id: recipe.id } }"
-            class="text-blue-600 underline-offset-4 duration-200 hover:(underline)"
+            class="text-primary underline-offset-4 duration-200 hover:(underline)"
           >
             {{ recipe.name }}
           </RouterLink>
@@ -74,10 +76,17 @@
               :to="{ name: 'recipe-delete', params: { id: recipe.id } }"
               class="text-xl flex items-center p-2"
             >
-              <Icon icon="tabler:trash" class="text-red-500" />
+              <Icon icon="tabler:trash" class="text-error" />
             </RouterLink>
           </tippy>
-          <tippy content="Update Recipe">update </tippy>
+          <tippy content="Update Recipe">
+            <RouterLink
+              :to="{ name: 'recipe-update', params: { id: recipe.id } }"
+              class="text-xl flex items-center p-2"
+            >
+              <Icon icon="tabler:edit" class="text-primary" />
+            </RouterLink>
+          </tippy>
         </td>
       </tr>
     </tbody>
