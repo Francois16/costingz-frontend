@@ -3,7 +3,7 @@
   import { Icon } from "@iconify/vue";
   import axios from "@/helpers/axios.js";
 
-  import DashboardHeadingVue from "@/components/ui/text/DashboardHeading.vue";
+  import DashboardHeading from "@/components/ui/text/DashboardHeading.vue";
 
   const recipes = ref();
 
@@ -22,7 +22,7 @@
 </script>
 
 <template>
-  <DashboardHeadingVue>
+  <DashboardHeading>
     <template v-slot:icon>
       <Icon icon="tabler:clipboard-list" />
     </template>
@@ -37,7 +37,7 @@
         </RouterLink>
       </tippy>
     </template>
-  </DashboardHeadingVue>
+  </DashboardHeading>
 
   <table
     class="w-full whitespace-nowrap bg-white shadow-lg rounded overflow-hidden"
@@ -52,7 +52,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr class="odd:(bg-light-600)" v-for="recipe in recipes">
+      <tr
+        class="odd:(bg-light-600) duration-200 hover:(bg-light-700)"
+        v-for="recipe in recipes"
+      >
         <td class="px-3 py-2 capitalize">
           <RouterLink
             :to="{ name: 'recipe-detail', params: { id: recipe.id } }"
