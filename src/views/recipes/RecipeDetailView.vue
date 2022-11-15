@@ -1,6 +1,6 @@
 <script setup>
   import { ref, onBeforeMount } from "vue";
-  import { useRoute } from "vue-router";
+  import { useRoute, RouterLink } from "vue-router";
   import { Icon } from "@iconify/vue";
   import { useToast } from "vue-toastification";
   import axios from "@/helpers/axios.js";
@@ -34,9 +34,13 @@
     <template #heading>{{ recipe.name }}</template>
     <template #button>
       <tippy content="Edit Recipe">
-        <button class="bg-primary p-2 rounded-full">
+        <RouterLink
+          v-if="recipe.id"
+          :to="{ name: 'recipe-update', params: { id: recipe.id } }"
+          class="bg-primary p-2 flex rounded-full"
+        >
           <Icon icon="tabler:edit" />
-        </button>
+        </RouterLink>
       </tippy>
     </template>
   </DashboardHeading>
