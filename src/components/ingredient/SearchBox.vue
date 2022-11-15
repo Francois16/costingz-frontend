@@ -53,7 +53,7 @@
       <!-- Results -->
       <Transition name="fade">
         <ul
-          v-if="displayResults"
+          v-if="displayResults && Object.keys(results).length"
           class="absolute bottom-full mb-1 inset-x-0 bg-white border shadow-2xl max-h-48 overflow-y-scroll"
         >
           <li v-for="ingredient in results">
@@ -66,6 +66,12 @@
             </button>
           </li>
         </ul>
+        <span
+          v-else-if="displayResults && !Object.keys(results).length"
+          class="absolute bottom-full mb-1 inset-x-0 p-6 text-center bg-white border shadow-2xl max-h-48"
+        >
+          No ingredients or recipes matching your search criteria
+        </span>
       </Transition>
     </div>
   </div>
