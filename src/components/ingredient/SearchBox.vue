@@ -5,7 +5,7 @@
   import axios from "@/helpers/axios.js";
 
   const searchBox = ref(null);
-  const results = ref(null);
+  const results = ref("");
   const displayResults = ref(false);
   const query = ref("");
 
