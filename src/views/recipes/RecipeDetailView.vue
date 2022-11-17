@@ -1,5 +1,5 @@
 <script setup>
-  import { ref, onBeforeMount } from "vue";
+  import { ref, onBeforeMount, onMounted } from "vue";
   import { useRoute, RouterLink } from "vue-router";
   import { Icon } from "@iconify/vue";
   import { useToast } from "vue-toastification";
@@ -10,15 +10,52 @@
   const route = useRoute();
   const toast = useToast();
   const recipe = ref({});
-
   async function getRecipeDetails() {
     try {
       const resp = await axios.get(`/recipe/${route.params.id}/detail/`);
-
       recipe.value = resp.data;
+      setPercentCostChart();
     } catch (error) {
       toast.error("cant fetch recipe");
     }
+  }
+
+  function setPercentCostChart() {
+    const labels = recipe.value.ingredients.map(
+      (ingredient) => ingredient.ingredient
+    );
+    const data = recipe.value.ingredients.map(
+      (ingredient) => ingredient.percentage_cost
+    );
+
+    const ctx = document.getElementById("percentageCostChart");
+
+    new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: "% cost: ",
+            data: data,
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          title: {
+            display: true,
+            text: "Percentage Cost per Ingredient",
+            font: {
+              size: 16,
+            },
+          },
+        },
+      },
+    });
   }
 
   onBeforeMount(() => {
@@ -45,66 +82,66 @@
     </template>
   </DashboardHeading>
 
-  <section class="grid md:(grid-cols-2) gap-6">
-    <div class="bg-white rounded-2xl shadow">
-      <h6 class="text-2xl font-bold p-4 underline underline-offset-8">
-        Yield & Cost
-      </h6>
+  <!-- <pre>{{ recipe.ingredients }}</pre> -->
+
+  <section class="grid md:(grid-cols-3) gap-6">
+    <div class="bg-white shadow-2xl col-span-1">
+      <h6 class="text-2xl font-bold p-3">Yield & Cost</h6>
       <ul class="divide-y">
         <li
-          class="flex flex-col sm:(flex-row) justify-between items-center p-3"
+          class="flex flex-col sm:(flex-row) justify-between items-center py-2 px-3"
         >
           <span>Total Recipe Cost</span>
-          <span class="bg-primary rounded-full px-5 font-bold">
-            R{{ recipe.total_cost }}
+          <span class="px-4" v-if="Object.keys(recipe).length">
+            R{{ recipe.total_cost.toFixed(2) }}
           </span>
         </li>
-        <li class="flex justify-between items-center p-4">
+        <li class="flex justify-between items-center py-2 px-3">
           <span>Cost per {{ recipe.yield_units }}</span>
-          <span class="bg-primary rounded-full px-5 font-bold">
-            R{{ recipe.unit_cost }}
+          <span class="px-4" v-if="Object.keys(recipe).length">
+            R{{ recipe.unit_cost.toFixed(2) }}
           </span>
         </li>
 
-        <li class="flex justify-between items-center p-4">
+        <li class="flex justify-between items-center py-2 px-3">
           <span>Yield Amount</span>
-          <span class="bg-primary rounded-full px-5 font-bold">
+          <span class="px-4">
             {{ recipe.yield_count }}
           </span>
         </li>
-        <li class="flex justify-between items-center p-4">
+        <li class="flex justify-between items-center py-2 px-3">
           <span>Yield Units</span>
-          <span class="bg-primary rounded-full px-5 font-bold">
+          <span class="px-4">
             {{ recipe.yield_units }}
           </span>
         </li>
       </ul>
     </div>
-    <div>
-      <h6>Categories</h6>
-      <p>Not Implemented on the backend yet.</p>
+
+    <div class="col-span-1">
+      <canvas id="percentageCostChart"></canvas>
     </div>
-    <h6 class="text-2xl font-bold col-span-2 underline underline-offset-8 mt-4">
+
+    <!-- <h6 class="text-2xl font-bold col-span-2 underline underline-offset-8 mt-4">
       Cost Breakdown
-    </h6>
-    <section class="grid grid-col-1 col-span-2 bg-white shadow">
+    </h6> -->
+
+    <section class="grid grid-col-1 col-span-full bg-white shadow-2xl">
       <table>
         <thead>
-          <tr class="border-b-2 border-body">
-            <th class="text-left p-3">Item</th>
-            <th class="text-left p-3">Quantity (Gross)</th>
-            <th class="text-left p-3">Item Cost</th>
-            <th class="text-left p-3">Cost Percentage</th>
+          <tr>
+            <th>Item</th>
+            <th>Quantity (Gross)</th>
+            <th>Item Cost</th>
+            <th>Cost Percentage</th>
           </tr>
         </thead>
         <tbody>
-          <tr class="odd:(bg-grey)" v-for="ingredient in recipe.ingredients">
-            <td class="p-3">{{ ingredient.ingredient }}</td>
-            <td class="p-3">
-              {{ ingredient.magnitude }} {{ ingredient.unit }}
-            </td>
-            <td class="p-3">R{{ ingredient.cost.toFixed(2) }}</td>
-            <td class="p-3">{{ ingredient.percentage_cost.toFixed(2) }}%</td>
+          <tr v-for="ingredient in recipe.ingredients">
+            <td>{{ ingredient.ingredient }}</td>
+            <td>{{ ingredient.magnitude }} {{ ingredient.unit }}</td>
+            <td>R{{ ingredient.cost.toFixed(2) }}</td>
+            <td>{{ ingredient.percentage_cost.toFixed(2) }}%</td>
           </tr>
         </tbody>
       </table>
@@ -112,4 +149,17 @@
   </section>
 </template>
 
-<style></style>
+<style>
+  thead > tr {
+    @apply border-b-2 border-body;
+  }
+
+  tbody > tr {
+    @apply odd:(bg-grey);
+  }
+
+  th,
+  td {
+    @apply text-left p-3;
+  }
+</style>
