@@ -40,7 +40,7 @@
             src="@/assets/images/avatar.png"
           />
           <span class="hidden md:(inline-block)">
-            {{ auth.user.first_name }} {{ auth.user.surname }}
+            {{ auth.user.first_name }}
           </span>
 
           <Icon
@@ -53,7 +53,7 @@
 
       <!-- Dropdown -->
       <div
-        class="bg-white shadow overflow-hidden absolute w-max min-w-full top-15 flex flex-col duration-200 transform origin-top-right"
+        class="bg-white rounded text-sm shadow overflow-hidden absolute w-max min-w-40 top-15 right-0 flex flex-col duration-200 transform origin-top-right"
         :class="navUserDropdown ? 'scale-100' : 'scale-0'"
       >
         <RouterLink
@@ -72,7 +72,7 @@
         </RouterLink>
         <button
           @click="auth.logout"
-          class="bg-red-600 text-white font-bold p-2 flex items-center justify-start gap-1 duration-200 hover:(bg-red-500)"
+          class="bg-error text-white font-bold p-2 flex items-center justify-start gap-1 duration-200 hover:(bg-red-500)"
         >
           <Icon icon="tabler:logout" />
           Logout
