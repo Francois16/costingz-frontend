@@ -19,7 +19,7 @@
     :class="navOpen ? 'w-20 lg:(w-64)' : 'w-20'"
   ></div>
   <div
-    class="bg-white flex flex-col shadow inset-y-0 left-0 gap-1 duration-200 fixed"
+    class="bg-white flex flex-col shadow inset-y-0 left-0 gap-1 duration-200 fixed z-50"
     :class="navOpen ? 'w-64 p-6' : 'w-14 px-2 py-4'"
     v-on-click-outside="closeNav"
   >
