@@ -57,13 +57,15 @@
         :class="navUserDropdown ? 'scale-100' : 'scale-0'"
       >
         <RouterLink
-          :to="{ name: 'home' }"
+          :to="{ name: 'profile' }"
+          @click="navUserDropdown = false"
           class="p-2 flex items-center justify-start gap-1 duration-200 hover:(bg-gray-200)"
         >
           <Icon icon="tabler:user" width="20" />
           Profile
         </RouterLink>
         <RouterLink
+          @click="navUserDropdown = false"
           :to="{ name: 'home' }"
           class="p-2 flex items-center justify-start gap-1 duration-200 hover:(bg-gray-200)"
         >

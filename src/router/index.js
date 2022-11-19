@@ -10,6 +10,9 @@ import DashboardView from "@/views/dashboard/DashboardView.vue";
 import LoginView from "../views/Autentication/LoginView.vue";
 import RegisterView from "../views/Autentication/RegisterView.vue";
 
+// User Routes
+import UserProfileView from "@/views/user/UserProfileView.vue";
+
 // Ingredient Routes
 import IngredientListView from "@/views/ingredients/IngredientListView.vue";
 import IngredientConfirmDeleteView from "@/views/ingredients/IngredientConfirmDeleteView.vue";
@@ -59,6 +62,13 @@ const router = createRouter({
       name: "register",
       meta: { layout: "base" },
       component: RegisterView,
+    },
+
+    // User Routes
+    {
+      path: "/profile",
+      name: "profile",
+      component: UserProfileView,
     },
 
     // Membership Routes
