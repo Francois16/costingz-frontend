@@ -22,7 +22,7 @@
   .field,
   .button {
     animation: pulse 1.5s infinite;
-    @apply inline-block bg-gray-200 h-10 rounded;
+    @apply inline-block bg-gray-200 h-8 rounded;
   }
 
   .title {
