@@ -168,8 +168,4 @@
   </div>
 </template>
 
-<style>
-  label {
-    @apply text-sm;
-  }
-</style>
+<style></style>

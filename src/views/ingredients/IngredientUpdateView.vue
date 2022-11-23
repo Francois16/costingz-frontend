@@ -141,9 +141,4 @@
   </form>
 </template>
 
-<style>
-  input,
-  select {
-    @apply border py-3 px-2 bg-white w-full focus:(outline-none border-primary);
-  }
-</style>
+<style></style>
