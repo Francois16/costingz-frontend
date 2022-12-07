@@ -10,7 +10,6 @@
 
   const loadProfileData = async () => {
     try {
-      // await new Promise((resolve) => setTimeout(resolve, 4000));
       const resp = await axios.get("/accounts/profile/update-user/");
       return resp.data;
     } catch (error) {
@@ -67,11 +66,6 @@
     </div> -->
 
     <Button text="Save Details" />
-    <!-- <button
-      class="self-end border-2 border-emerald-600 text-emerald-600 py-2 px-5 hover:(bg-emerald-600 text-white) duration-200 rounded font-semibold"
-    >
-      Save Details
-    </button> -->
   </form>
 </template>
 
