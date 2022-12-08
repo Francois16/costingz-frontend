@@ -49,6 +49,7 @@
     <thead class="bg-body text-white">
       <tr>
         <th class="text-left p-3">Name ({{ ingredients.length }} items)</th>
+        <th class="text-left p-3">Category</th>
         <th class="text-left p-3">Purchase Amount</th>
         <th class="text-left p-3">Purchase Price</th>
         <th class="text-left p-3">Price/Unit</th>
@@ -60,6 +61,7 @@
         <td class="px-3 py-2 capitalize">
           {{ ingredient.name }}
         </td>
+        <td class="px-3 py-2 capitalize">{{ ingredient.category }}</td>
         <td class="px-3 py-2">
           {{ ingredient.magnitude }} {{ ingredient.short_unit }}
         </td>
