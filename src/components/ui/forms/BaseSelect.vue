@@ -19,6 +19,7 @@
 
     <div class="select-container">
       <select
+        v-model="modelValue"
         @input="$emit('update:modelValue', $event.target.value)"
         v-bind="$attrs"
       >
