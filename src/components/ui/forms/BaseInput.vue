@@ -16,12 +16,12 @@
       {{ label }}
     </label>
     <div
-      class="border py-2 px-5 rounded duration-200 group-focus-within:( border-primary) flex items-center gap-1"
+      class="border rounded duration-200 group-focus-within:( border-primary) flex items-center gap-1 overflow-hidden"
     >
       <span v-if="icon" class="text-muted select-none">{{ icon }}</span>
       <input
         type="text"
-        class="focus:(outline-none) w-full"
+        class="focus:(outline-none) py-2 px-5 w-full"
         :value="modelValue"
         v-bind="$attrs"
         @input="$emit('update:modelValue', $event.target.value)"
