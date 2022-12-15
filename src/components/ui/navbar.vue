@@ -1,4 +1,5 @@
 <script setup>
+  import { RouterLink } from "vue-router";
   import { useAuthStore } from "../../stores/useAuth";
 
   const auth = useAuthStore();
@@ -12,17 +13,18 @@
       </RouterLink>
 
       <div v-if="!auth.isAuthenticated" class="hidden sm:(flex)">
-        <router-link
+        <RouterLink
           to="/login"
           class="bg-sky-800 p-3 rounded-md font-bold text-white"
         >
           Login
-        </router-link>
+        </RouterLink>
       </div>
       <div v-else class="flex items-center justify-center gap-3">
+        <RouterLink :to="{ name: 'dashboard' }" class="">Dashboard</RouterLink>
         <RouterLink to="/pricing">Pricing</RouterLink>
         <button
-          class="text-red-700 p-3 font-bold rounded-md"
+          class="text-error p-3 font-bold rounded-md"
           @click="auth.logout"
         >
           Logout
