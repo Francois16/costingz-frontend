@@ -8,6 +8,7 @@
   import BaseSelect from "@/components/ui/forms/BaseSelect.vue";
   import BaseListBox from "@/components/ui/dropdowns/BaseListBox.vue";
   import Button from "@/components/ui/buttons/Button.vue";
+  import IngredientCategoryCreateModal from "@/components/modals/categories/IngredientCategoryCreateModal.vue";
 
   const formData = ref({
     name: "",
@@ -53,8 +54,6 @@
         category.value = category.id;
         delete category.id;
       });
-
-      console.log(resp.data);
 
       categories.value = resp.data;
 
@@ -111,12 +110,18 @@
       />
     </div>
 
-    <BaseListBox
-      v-model="formData.category"
-      label="Category"
-      helpText="Select a category for your ingredient"
-      :options="categories"
-    />
+    <div class="flex gap-2">
+      <BaseListBox
+        class="flex-1"
+        v-model="formData.category"
+        label="Category"
+        helpText="Select a category for your ingredient"
+        :options="categories"
+      />
+      <div class="self-center self-end">
+        <IngredientCategoryCreateModal />
+      </div>
+    </div>
 
     <Button text="Create" />
   </form>
